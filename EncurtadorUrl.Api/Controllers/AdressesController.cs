@@ -26,7 +26,14 @@ namespace EncurtadorUrl.Api.Controllers
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
-            => Success(await _addressRepository.GetByIdAsync(id));
+        {
+            var address = await _addressRepository.GetByIdAsync(id);
+            address.SetHits();
+
+            await _addressRepository.UpdateAsync(address);
+
+            return Success(address);
+        }
 
         [HttpGet("topfive")]
         public async Task<IActionResult> GetTopFive()

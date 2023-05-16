@@ -11,7 +11,6 @@ namespace EncurtadorUrl.Api.Shared.Models
         public string Url { get; private set; }
         public string ShortUrl { get; private set; }
 
-
         private Address() { }
 
         public Address(string url)
@@ -19,9 +18,9 @@ namespace EncurtadorUrl.Api.Shared.Models
             Url = url;
         }
 
-        public Address SetHits(int? hits = null)
+        public Address SetHits(int hits = 0)
         {
-            Hits = hits ?? (Hits == 0 ? 0 : Hits++);
+            Hits = hits == 0 ? Hits += 1 : hits;
             return this;
         }
 
